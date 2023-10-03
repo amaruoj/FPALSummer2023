@@ -18,32 +18,31 @@ ny = 101;
 
 % actual values for reference:
 % x = linspace(-10,30,401));
-% x = linspace(0.1,30,300);
+% x = linspace(0.1,30,300); is the actual x-vector
 % y = linspace(-5,5,101);
 % z = 0;
 
-% creates output matrix of size nfiles x ncoords x nvars
-nfiles = length(pcd);
+% creates output matrix of size nt x ncoords x nvars
+nt = length(pcd);
 ncoords = nx * ny;
 nvars = 5;
 
 % process one file to find idx x < 0 to trim data
 [coords, ~] = readBox(fullfile(folder, pbin.name),fullfile(folder, pcd(1).name));
 ind = find(coords(:,1,1)>0);
-planar_data = zeros(nfiles,ncoords,nvars);
-clear coords
+planar_data = zeros(nt,ncoords,nvars);
 
 % data processing loop
 tic
 
-for i = 1:nfiles
-    disp(['There are ', num2str(nfiles - i + 1), ' files left to process!'])
+for i = 1:nt
+    disp(['There are ', num2str(nt - i + 1), ' files left to process!'])
     
     % use readBox.m
     currPcd = pcd(i);
     [~, data] = readBox(fullfile(folder, pbin.name),fullfile(folder, currPcd.name));
     data = data';
-    data = data(ind,:); %#ok<FNDSB>
+    data = data(ind,:);
     
     % update raw data matrix
     planar_data(i,:,(1:5)) = data;
@@ -55,8 +54,7 @@ end
 % reshaping data
 tic
 disp('reshaping data to make it easier to work with...')
-%     planar_data_reshape = reshape(planar_data, nx, ny, nz, [], chunk);
-planar_data_reshape = reshape(planar_data,chunk,nx,ny,[]);
+planar_data_reshape = reshape(planar_data,nt,nx,ny,[]);
 disp('finished! (*¯︶¯*)')
 toc
 
@@ -67,12 +65,41 @@ tic
 disp('saving data...')
 filename = 'output';
 out_dir = fullfile('..','output_data');
+
+if ~exist(out_dir,'dir')
+   mkdir(out_dir); 
+end
+
 save(fullfile(out_dir, filename),'data','-v7.3');
 disp(['done! saved as ', filename, '.mat! ♪(´▽｀)'])
 clear data;
 toc
 
-disp('all done! (>^ω^<)')
+disp('all done! (>^ω^<) returning contour plot of velocity')
 toc
+
+X = reshape(coords(ind,1), Nx, Ny);
+Y = reshape(coords(ind,2), Nx, Ny);
+fig = contourf(X,Y, squeeze(data(2,:,:,5)),'edgecolor','none');
+title("Contour Plot showing Density");
+xlabel("X/D_e, X-Distance from Nozzle Exit");
+ylabel("Y/D_e, Y-Distance from Nozzle Exit");
+colorbar;
+
+% save contour plot
+
+disp('saving plot...')
+figName = 'data_contour.fig';
+pngName = 'data_contour.png';
+out_dir = fullfile('..','figs');
+
+if ~exist(out_dir,'dir')
+   mkdir(out_dir); 
+end
+
+saveas(fig,fullfile('..','figs',figName));
+saveas(fig,fullfile('..','figs',pngName));
+disp('done! saved as data_contour.fig AND .png! ♪(´▽｀)')
+clear data;
 
 end

@@ -1,0 +1,37 @@
+# POINTCLOUD_PROBE NAME pcprobes/nearfield INTERVAL 100 PRECISION FLOAT FORMAT BINARY GEOM FILE probe_xy.txt VARS comp(u,0) comp(u,1) comp(u,2) rho p
+# mles hash id NGPGj4lao9Y8kLEDpV+2WQyrLH4=
+# sles hash id qzYYoKocwQB5rGULjkfUm8tnwvY=
+
+input file: probe_xy.txt
+number of points (npt): 39386
+points io magic number for endianness check (num) : 1235813
+points io version (ver): 2
+points io delta flag (flag): 0
+point cloud data precision (prec): 0 => float
+number of scalars (nsc): 5
+
+the scalars are:
+   sc_1 comp(u,0)
+   sc_2 comp(u,1)
+   sc_3 comp(u,2)
+   sc_4 p
+   sc_5 rho
+
+point cloud coordinates written in binary format (.pbin): pcprobes/nearfield.pbin
+    num[long] ver[long] npt[long] flg[long] 
+    x_1[double] y_1[double] z_1[double] 
+    x_2[double] y_2[double] z_2[double] 
+    ...
+    x_npt[double] y_npt[double] z_npt[double] 
+    i_1[long] 
+    i_2[long] 
+    ...
+    i_npt[long] 
+
+point cloud data written in binary fomat: pcprobes/nearfieldXXXXXXXX.pcd, where XXXXXXXX is the step number.
+    num[long] ver[long] npt[long] nsc[long] prec[long]
+    sc_1(x_1,y_1,z_1)[float] sc_1(x_2,y_2,z_2)[float] ... sc_1(x_npt,y_npt,z_npt)[float] 
+    sc_2(x_1,y_1,z_1)[float] sc_2(x_2,y_2,z_2)[float] ... sc_2(x_npt,y_npt,z_npt)[float] 
+    ...
+    sc_nsc(x_1,y_1,z_1)[float] sc_nsc(x_2,y_2,z_2)[float] ... sc_nsc(x_npt,y_npt,z_npt)[float] 
+

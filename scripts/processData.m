@@ -61,7 +61,7 @@ toc
 
 data = planar_data_reshape;
 
-save data
+% save data
 tic
 disp('saving data...')
 filename = 'output';

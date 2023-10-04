@@ -36,6 +36,7 @@ planar_data = zeros(nt,ncoords,nvars);
 tic
 
 for i = 1:nt
+    
     disp(['There are ', num2str(nt - i + 1), ' files left to process!'])
     
     % use readBox.m
@@ -61,30 +62,30 @@ toc
 data = planar_data_reshape;
 
 % save data
-tic
-disp('saving data...')
-filename = 'output';
-out_dir = fullfile('..','output_data');
-
-if ~exist(out_dir,'dir')
-   mkdir(out_dir); 
-end
-
-save(fullfile(out_dir, filename),'data','-v7.3');
-disp(['done! saved as ', filename, '.mat! ♪(´▽｀)'])
-clear data;
-toc
+% tic
+% disp('saving data...')
+% filename = 'output';
+% out_dir = fullfile('..','output_data');
+% 
+% if ~exist(out_dir,'dir')
+%    mkdir(out_dir); 
+% end
+% 
+% save(fullfile(out_dir, filename),'data','-v7.3');
+% disp(['done! saved as ', filename, '.mat! ♪(´▽｀)'])
+% toc
 
 disp('all done! (>^ω^<) returning contour plot of velocity')
 toc
 
-X = reshape(coords(ind,1), Nx, Ny);
-Y = reshape(coords(ind,2), Nx, Ny);
+X = reshape(coords(ind,1), nx, ny);
+Y = reshape(coords(ind,2), nx, ny);
 fig = contourf(X,Y, squeeze(data(2,:,:,5)),'edgecolor','none');
 title("Contour Plot showing Density");
 xlabel("X/D_e, X-Distance from Nozzle Exit");
 ylabel("Y/D_e, Y-Distance from Nozzle Exit");
 colorbar;
+clear data coords
 
 % save contour plot
 
@@ -97,8 +98,8 @@ if ~exist(out_dir,'dir')
    mkdir(out_dir); 
 end
 
-saveas(fig,fullfile('..','figs',figName));
-saveas(fig,fullfile('..','figs',pngName));
+saveas(gcf,fullfile(out_dir,figName));
+saveas(gcf,fullfile(out_dir,pngName));
 disp('done! saved as data_contour.fig AND .png! ♪(´▽｀)')
 clear data;
 

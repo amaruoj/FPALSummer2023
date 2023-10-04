@@ -61,19 +61,19 @@ toc
 
 data = planar_data_reshape;
 
-% save data
-% tic
-% disp('saving data...')
-% filename = 'output';
-% out_dir = fullfile('..','output_data');
-% 
-% if ~exist(out_dir,'dir')
-%    mkdir(out_dir); 
-% end
-% 
-% save(fullfile(out_dir, filename),'data','-v7.3');
-% disp(['done! saved as ', filename, '.mat! ♪(´▽｀)'])
-% toc
+save data
+tic
+disp('saving data...')
+filename = 'output';
+out_dir = fullfile('..','output_data');
+
+if ~exist(out_dir,'dir')
+   mkdir(out_dir); 
+end
+
+save(fullfile(out_dir, filename),'data','-v7.3');
+disp(['done! saved as ', filename, '.mat! ♪(´▽｀)'])
+toc
 
 disp('all done! (>^ω^<) returning contour plot of velocity')
 toc

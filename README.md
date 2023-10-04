@@ -1,5 +1,5 @@
 # FPAL Summer 2023 Stress Tensor Exercise -- Amaru Ordóñez-Jacobson
-Collection of scripts and figures describing the Reynolds stress tensors of a jet plume designed by Gary Wu, whose data has not been included in this repository(except for two timesteps that are used for debugging). These scripts are designed to analyze the planar dataset collected by Gary – the volumetric dataset would require a slightly different approach due to the different setup of the dataset. The order for script execution is:
+Collection of scripts and figures describing the Reynolds stress tensors of a jet plume designed by Gary Wu, whose data has not been included in this repository (except for two timesteps that are used for debugging). These scripts are designed to analyze the planar dataset collected by Gary – the volumetric dataset would require a slightly different approach due to the different setup of the dataset. The order for script execution is:
 1. `processData.m`, for data post-processing and reshaping.
 2. `generateTensor.m`, for generating the raw stress tensor (no normalization)
 3. `normTensor.m`, for normalizing the stress tensor

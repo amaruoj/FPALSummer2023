@@ -1,0 +1,5 @@
+planar_data/
+output_data/
+.DS_Store
+*.m~
+*.asv

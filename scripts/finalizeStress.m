@@ -22,7 +22,7 @@ end
 % raw values until x = 4
 result((1:40),:) = posY(1:40,:);
 
-% start averaging at x = 4, assume self similarity afterwards
+% start averaging at x = 4, assume axial symmetry afterwards
 for i = 40:nx
         for j = 1:length(y1)
             posVal = posY(i,j,:); negVal = negY(i,j,:);

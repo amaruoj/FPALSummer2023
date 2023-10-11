@@ -7,6 +7,7 @@ function tensor = generateTensor(folder)
 % result:   Reynolds Stress Tensor without normalization
 
 names = {'uu','uv','vv','ww'};
+data = load(fullfile(folder,'output.mat')).data;
 
 % planar data coordinate definition
 nx = 300;
@@ -21,7 +22,7 @@ disp('generating tensor...')
 for i = 1:length(names)
     tic
     disp(['building the ', names{i}, ' component of the tensor!'])
-    tensor(:,:,i) = generateStress(folder,names{i});
+    tensor(:,:,i) = generateStress(data,names{i});
     toc
 end
 disp('tensor generated!')
@@ -31,7 +32,7 @@ toc
 tic
 disp('saving tensor...')
 filename = 'raw_re';
-out_dir = fullfile('..','matrices','raw_tensors');
+out_dir = fullfile('..','output_data');
 save(fullfile(out_dir, filename),'tensor','-v7.3');
 disp(['done! saved as ', filename, '.mat! ♪(´▽｀)'])
 clear data;

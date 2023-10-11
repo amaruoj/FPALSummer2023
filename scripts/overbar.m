@@ -1,4 +1,4 @@
-function [mean1,mean2] = overbar(folder,val1,val2)
+function [mean1,mean2] = overbar(data,val1,val2)
 % input:
 % data: readBox.m data folder
 % val1, val2:   variables to be averaged
@@ -7,43 +7,35 @@ function [mean1,mean2] = overbar(folder,val1,val2)
 % mean1: vector of means for variable 1 at each location from the data
 % mean2: vector of means for variable 1 at each location from the data
 
-% data retrieval
-mat = dir(fullfile(folder,'*.mat'));
-nmat = length(mat);
-
-% planar data coordinate definition
-nx = 300;
-ny = 101;
-% nz = 1;
-output = zeros(nx,ny,nmat,2);
-
-% loop over saved matrices
-for i = 1:nmat
-    
-    % extract data
-    currMat = load(fullfile(folder,mat(i).name));
-    data = currMat.data;
-    U1 = data(:,:,:,val1); U2 = data(:,:,:,val2);
-    
-    % find time-averaged velocities
-    outputMean1 = mean(U1,1); outputMean2 = mean(U2,1);
-    outputMean1 = permute(outputMean1,[2,3,1]);
-    outputMean2 = permute(outputMean2,[2,3,1]);
-
-    % add to resultant vector
-    output(:,:,i,1) = outputMean1; output(:,:,i,2) = outputMean2;
-    
-end
-
-% finish averaging velocities over entire dataset and return
-mean1 = mean(output(:,:,:,1),3); mean2 = mean(output(:,:,:,2),3);
+% averaging
+U1 = data(:,:,:,val1); U2 = data(:,:,:,val2);
+mean1 = mean(U1,1); mean2 = mean(U2,1);
+mean1 = permute(mean1,[2,3,1]); mean2 = permute(mean2,[2,3,1]);
 
 if val1 == 1
     uBar = mean1;
     filename = 'uBar';
-    out_dir = fullfile('..','matrices','mean_data');
+    out_dir = fullfile('..','output_data');
     save(fullfile(out_dir,filename),'uBar','-v7.3');
 end
+
+% save plots
+fig = contourf(mean1,'EdgeColor','none');
+colorbar;
+num = num2str(val1);
+if num == '1'; name = 'U'; end
+if num == '2'; name = 'V'; end
+if num == '3'; name = 'W'; end
+title(['Mean Velocity Contour for the ',name,' Component of the Velocity']);
+xlabel("Y/D_e, Y-Distance from Nozzle Exit");
+ylabel("X/D_e, X-Distance from Nozzle Exit");
+view(90,90);
+figName = append('meancontour_',num,'.fig');
+pngName = append('meancontour_',num,'.png');
+out_dir = fullfile('..','figs');
+saveas(gcf,fullfile(out_dir,figName));
+saveas(gcf,fullfile(out_dir,pngName));
+disp('done! saved as data_contour.fig AND .png! ♪(´▽｀)')
 
 end
 

@@ -11,6 +11,8 @@ The order for script execution is:
 
 Output from `normRadius.m` can be used to debug the raw stress tensor, but only to verify their shape. Working on just running eveything through a `main` function, but it's useful for debugging to run in large chunks.
 
+As of 12 October 2023, normalization scripts need updating -- only tensor calculations have been verified.
+
 ## Data Representation
 To demonstrate the different debugging steps, I've collected many figures that demonstrate different aspects of the calculation of the stress tensors. In the `figs` folder, I demonstrate critical steps to the tensor calculation, such as mean velocity contours and fluctuation contours. These figures have been saved as both `.png` and `.fig` file extensions for ease of access and ease of editing, respectively. Below is a comprehensive list of the figures included in this repository:
 - `data_contour`: A simple data contour plot output from the `processData.m` processing script, demonstrating the density contour at 1 acoustic time unit.

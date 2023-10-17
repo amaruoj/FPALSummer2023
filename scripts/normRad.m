@@ -76,7 +76,7 @@ disp('saving plots...')
 figName1 = "fit_test_r.fig";
 pngName1 = "fit_test_r.png";
 figName2 = "fit_test_u.fig";
-pngName2 = "fit_test_u.fig";
+pngName2 = "fit_test_u.png";
 out_dir = fullfile('..','figs');
 saveas(fig1,fullfile(out_dir,figName1));
 saveas(fig1,fullfile(out_dir,pngName1));

@@ -6,12 +6,10 @@ The order for script execution is:
 1. `processData.m`, for data post-processing and reshaping.
 2. `generateTensor.m`, for generating the raw stress tensor (no normalization)
 3. `normTensor.m`, for normalizing the stress tensor
-4. `normRadius.m`, for calculating the normalized radius
+4. `normRad.m`, for calculating the normalized radius
 5. `plotNormRe.m`, for plotting the normalized tensor components against the normalized radius.
 
-Output from `normRadius.m` can be used to debug the raw stress tensor, but only to verify their shape. Working on just running eveything through a `main` function, but it's useful for debugging to run in large chunks.
-
-As of 12 October 2023, normalization scripts need updating -- only tensor calculations have been verified.
+To run everything in one pass, simply call `main()` (this may be the wrong way to implement this functionality, please let me know if there's a better way).
 
 ## Data Representation
 To demonstrate the different debugging steps, I've collected many figures that demonstrate different aspects of the calculation of the stress tensors. In the `figs` folder, I demonstrate critical steps to the tensor calculation, such as mean velocity contours and fluctuation contours. These figures have been saved as both `.png` and `.fig` file extensions for ease of access and ease of editing, respectively. Below is a comprehensive list of the figures included in this repository:
@@ -20,5 +18,9 @@ To demonstrate the different debugging steps, I've collected many figures that d
 - `fluccontour_i`: A contour plot demonstrating the fluctuation of the `i`th component of the velocity with its mean velocity.
 - `fluctcontour_ij`: A contour plot demonstrating the combined fluctuation of `ij`.
 - `stresscontour_ij`: A contour plot demonstrating the `ij` component of the stress tensor.
+- `fit_test_i`: Plots validating the calculation of $r_{1/2}$, the jet's half-width, by showing its trend with x-distance from the nozzle exit and its associated velocity from the fit.
+- `normRe_xi`: The normalized Reynolds Stress Tensor at $X/D_e= \ $`i`.
+- `Ufit_normRe_xi`: The U-component of the normalized Reynolds Stress Tensor at $X/D_e= \ $`i` with a `gauss1` fit applied, just to see how things will change.
+- `fit_normRe_xi`: The Reynolds Stress Tensor at $X/D_e= \ $`i` with a `gauss1` fit applied.
 
 These figures are for pointing out bugs and for making sure that the profiles are behaving properly.

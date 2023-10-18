@@ -11,6 +11,9 @@ function processData(folder)
 pbin = dir(fullfile(folder,'*.pbin'));
 pcd = dir(fullfile(folder,'*.pcd'));
 
+% first 450 acoustic time units are corrupted, use the last 150 only
+pcd = pcd(end-1500:end);
+
 % planar data coordinate definition
 nx = 300;
 ny = 101;

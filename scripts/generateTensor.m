@@ -7,7 +7,8 @@ function tensor = generateTensor(folder)
 % result:   Reynolds Stress Tensor without normalization
 
 names = {'uu','uv','vv','ww'};
-data = load(fullfile(folder,'output.mat')).data;
+temp = load(fullfile(folder,'output.mat'));
+data = temp.data;
 
 % planar data coordinate definition
 nx = 300;

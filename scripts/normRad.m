@@ -6,8 +6,11 @@ function radius = normRad(folder)
 % radius:   normalized radius, r/r_1/2
 
 % load data
-data = load(fullfile(folder,'output.mat')).data;
-meanU = load(fullfile(folder,'uBar.mat')).uBar;
+temp = load(fullfile(folder,'output.mat'));
+data = temp.data;
+temp = load(fullfile(folder,'uBar.mat'));
+meanU = temp.uBar;
+clear temp
 
 % calculate centerline velocity
 U = centerU(data)';

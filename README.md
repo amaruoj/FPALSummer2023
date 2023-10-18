@@ -5,8 +5,8 @@ Collection of scripts and figures describing the Reynolds stress tensors of a je
 The order for script execution is:
 1. `processData.m`, for data post-processing and reshaping.
 2. `generateTensor.m`, for generating the raw stress tensor (no normalization)
-3. `normTensor.m`, for normalizing the stress tensor
-4. `normRad.m`, for calculating the normalized radius
+3. `normRad.m`, for calculating the normalized radius
+4. `normTensor.m`, for normalizing the stress tensor
 5. `plotNormRe.m`, for plotting the normalized tensor components against the normalized radius.
 
 To run everything in one pass, simply call `main()` (this may be the wrong way to implement this functionality, please let me know if there's a better way).

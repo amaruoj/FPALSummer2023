@@ -3,3 +3,4 @@ output_data/
 .DS_Store
 *.m~
 *.asv
+scripts/normRadius.m

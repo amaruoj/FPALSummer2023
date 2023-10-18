@@ -12,7 +12,7 @@ mean1 = permute(mean1,[3,1,2]); mean2 = permute(mean2,[3,1,2]);
 
 % calculate fluctuation
 U1 = data(:,:,:,val1); U2 = data(:,:,:,val2);
-fluc1 = abs(U1 - mean1); fluc2 = abs(U2 - mean2);
+fluc1 = U1 - mean1; fluc2 = U2 - mean2;
 
 % save plots
 plotVar = permute(fluc1(1,:,:),[2,3,1]);
@@ -31,7 +31,7 @@ pngName = append('fluccontour_',num,'.png');
 out_dir = fullfile('..','figs');
 saveas(gcf,fullfile(out_dir,figName));
 saveas(gcf,fullfile(out_dir,pngName));
-disp('done! saved as data_contour.fig AND .png! ♪(´▽｀)')
+disp(['done! saved as ',figName,' AND .png! ♪(´▽｀)'])
 
 
 

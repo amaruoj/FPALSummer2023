@@ -6,8 +6,10 @@ function re = normTensor(folder)
 % result:   normalized Reynolds Stress tensor
 
 % load data
-raw_re = load(fullfile(folder,'raw_re.mat')).tensor;
-U = load(fullfile(folder,'centerU.mat')).U;
+temp = load(fullfile(folder,'raw_re.mat'));
+raw_re = temp.tensor;
+temp = load(fullfile(folder,'centerU.mat'));
+U = temp.U;
 
 % create normalization
 norm = U'.^2;

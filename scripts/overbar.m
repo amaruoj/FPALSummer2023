@@ -35,7 +35,7 @@ pngName = append('meancontour_',num,'.png');
 out_dir = fullfile('..','figs');
 saveas(gcf,fullfile(out_dir,figName));
 saveas(gcf,fullfile(out_dir,pngName));
-disp('done! saved as data_contour.fig AND .png! ♪(´▽｀)')
+disp(['done! saved as ',figName,' AND .png! ♪(´▽｀)'])
 
 end
 
